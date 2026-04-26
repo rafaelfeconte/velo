@@ -11,9 +11,12 @@ test('test', async ({ page }) => {
   // Act
   await page.getByTestId('search-order-id').click();
   await page.getByTestId('search-order-id').fill('VLO-I2A5YA');
-  await page.getByTestId('search-order-button').click();
+  await page.getByRole('button', { name: 'Buscar Pedido' }).click();
 
   // Assert
-  await expect(page.getByTestId('order-result-id')).toContainText('VLO-I2A5YA');
-  await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
+  await expect(page.locator('//*[contains(text(), "VLO-I2A5YA")]')).toBeVisible();
+  await expect(page.locator('//*[contains(text(), "APROVADO")]')).toBeVisible();
+
+  //await expect(page.getByTestId('order-result-id')).toContainText('VLO-I2A5YA');
+  //await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
 });
